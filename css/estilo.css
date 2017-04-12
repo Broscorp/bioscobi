@@ -1,0 +1,104 @@
+p{
+	
+	align-content: center;
+	color: #4C5400;
+	font-size: 19px;
+	font-family: Gadugi; 
+	text-align: justify;
+}
+
+
+body{
+	margin-top: 20px;
+	width: 95%;
+	height: 800;
+	margin-left: 30px;
+	margin-right: 30px;
+	
+}
+
+.container-fluid{
+	
+	
+	background-color: #C8D168;
+	background-size: auto;
+	font-family:Gadugi;
+}
+
+ul.nav.navbar-nav li.active{
+	background-color: #C8D168;
+}
+
+
+*{margin: 0; padding: 0;}
+
+.wrapper{
+	
+	width: 100%;
+	height: 100%;
+	max-width: 800px;
+	margin: auto;
+	
+	overflow: hidden;
+	float: left;
+	
+	
+}
+
+.row {
+	
+	margin-top: 250px;
+	align-content: center;
+	align-items: center;
+	text-align: center;
+	background-color:#D7E166;
+}
+
+.img-circle
+{
+	
+	align-content: center;
+}
+wrapper.empresa{
+	
+
+    margin-top: 50px;
+	align-content: center;
+	text-align: center;
+	align-items: center;
+	overflow: hidden;
+	float: right;
+	
+}
+
+.footer
+{
+	margin-top: 50px;
+	margin-bottom: 35px;
+	width: 100%;
+	height: 150px;
+	background-color: #C8D168;
+}
+
+.test{
+	
+	margin-top: 10px;
+	margin-bottom: 10px;
+	align-content: center;
+	align-items: center;
+	text-align: center;
+	font-family: Gadugi;
+	color: #1F2913;
+	
+}
+
+h2{
+	
+	color: #555300;
+	text-align: center;
+	font-family: Gadugi;
+}
+
+
+
+

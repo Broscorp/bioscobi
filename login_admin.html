@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="keywords" content="administrador, clientes">
+		<meta name="description" content="Sistema de administracion de clientes">
+		<title>Administracion de Clientes</title>
+        <script src="js/jquery-3.1.1.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+        <script src="js/pnotify.custom.min.js"></script>
+		<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+        <link href="css/estilo.css"  rel="stylesheet" type="text/css">
+        <link href="css/pnotify.custom.min.css" type="text/css" rel="stylesheet" media="all">		
+	</head>
+	<body>
+	
+	<div class="container">
+		
+		<form id="frmComensales" action="post"> 
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+			<h2 class="panel-title">Listado de clientes</h2>
+			
+				</div>
+					<div class="panel-body">
+						<table id="tablaComensales" class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>id_cliente</th>
+								<th>nombre</th>
+							    <th>apaterno</th>
+								<th>amaterno</th>
+								<th>correo</th>
+							</tr>
+							</thead>
+							<tbody>
+								
+								
+								
+							</tbody>
+						</table> 
+						<button type="button" id="new" data-toggle="modal" data-target ="#nuevo"
+								class="btn btn-primary">Nuevo Cliente</button>
+						
+						<button type="button" id="modificar" class="btn btn-warning" data-toggle="modal" data-target="#nuevo">Modificar</button>
+				
+						<button type="button" id="eliminar" class="btn btn-danger">Eliminar</button>
+				</div>
+			</div>
+			<!---------------------------------------Ventana Modal -------------------->
+			<div class="modal fade" id="nuevo">
+			
+				<div class="modal-dialog modal-lg">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h2 class="panel-title"> Registro de clientes</h2>
+						</div>
+						
+						 <div class="panel-body">
+							 <input type="hidden" name="id_cliente" id="id_cliente">
+							<div class="form-group">
+							 	<label>Nombre:</label>
+								<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Escribe el Nombre del cliente">
+							 </div>
+							 <div class="form-group">
+							 	<label>Apellido Paterno:</label>
+								<input type="text" class="form-control" name="apaterno" id="apaterno" placeholder="Escribe el apellido paterno del cliente">
+							 </div>
+							 <div class="form-group">
+							 	<label>Apellido Materno:</label>
+								<input type="text" class="form-control" name="amaterno" id="amaterno" placeholder="Escribe el apellido  materno del cliente">
+							 </div>
+							 <div class="form-group">
+							 	<label>Correo:</label>
+								<input type="text" class="form-control" name="correo" id="correo" placeholder="Escribe el correo del cliente">
+							 </div>
+						</div>
+						
+						<div class="panel-footer">
+							<button type="button" class="btn btn-success btn-lg" id="guardarComensal">Guardar</button>
+						
+						</div>
+					
+					</div>
+					
+				</div>
+				
+			</div>
+						<!---------------------------------------Ventana Modal Fin------------------------------------>
+
+		</form>
+	</div>
+		
+		<!-------------------Parte JavaScript-------------------Agragado de App.js------------------------------------>
+		
+		<script src="js/app.js"></script>
+        <script src="js/validaciones.js"></script>
+		<script type = "text/javascript">
+		
+			$(document).ready(function(){
+				ajaxComensales('seleccionar', 'scripts/ubase.php', 'frmComensales');
+			});
+			
+			$('#guardarComensal').click(function(){
+			
+				if (validaComensales()){
+                     var accion = ($('#id_cliente').val()=== '')?'insertar':'actualizar';
+                ajaxComensales(accion,'scripts/ubase.php', 'frmComensales');
+                $('.modal').modal('toggle');
+                $('#tablaComensales tbody').empty();
+                    
+                    if(accion == 'insertar'){
+                    PNotify.prototype.options.styling = "bootstrap3";
+					
+					new PNotify({
+						
+						title: 'Registro de clientes',
+						text: 'Cliente registrada correctamente',
+						type: 'success',
+						hide:  true,
+						icon: 'glyphicon glyphicon-cutlery'
+					});
+                    }else{
+                        PNotify.prototype.options.styling = "bootstrap3";
+					
+					new PNotify({
+						
+						title: 'Registro de clientes',
+						text: 'Modificacion realizada correctamente',
+						type: 'success',
+						hide:  true,
+						icon: 'glyphicon glyphicon-cutlery'
+					});
+                    }
+            $('#modificar').attr("disabled", true);
+			$('#eliminar').attr("disabled", true);
+            $('#new').attr("enabled",true);        
+                    
+                }else {
+                    PNotify.prototype.options.styling = "bootstrap3";
+					
+					new PNotify({
+						
+						title: 'Registro de clientes',
+						text: 'Favor de llenar todos los datos',
+						type: 'error',
+						hide: true,
+						icon: 'glyphicon glyphicon-remove-circle'
+					});
+                }
+                
+                ajaxComensales('seleccionar','scripts/ubase.php','frmComensales');
+			});
+		
+			$('#tablaComensales tbody').on('click', 'tr', function(){
+				
+				if($(this).hasClass('warning')){
+					$(this).removeClass('warning');
+					$('#modificar').attr("disabled", true);
+					$('#eliminar').attr("disabled", true);
+					$('#new').attr("disabled", false);
+					$('input').val('');
+				}else{
+					$(this).siblings('tr').removeClass('warning');
+					$(this).addClass('warning');
+					$('#modificar').attr("disabled", false);
+					$('#eliminar').attr("disabled", false);
+					$('#new').attr("disabled", true);
+					
+					$('#id_cliente').val($(this).children("td:nth-child(1)").text());
+					$('#nombre').val($(this).children("td:nth-child(2)").text());
+					$('#apaterno').val($(this).children("td:nth-child(3)").text());
+					$('#amaterno').val($(this).children("td:nth-child(4)").text());
+					$('#correo').val($(this).children("td:nth-child(5)").text());
+					
+					
+					console.log($('#id_cliente').val());
+				}
+			});
+			
+			
+			$('#eliminar').click(function(){
+				ajaxComensales('eliminar', 'scripts/ubase.php', 'frmComensales'); //Llena la tabla
+				$('#tablaComensales tbody').empty(); //Vacia la tabla
+                PNotify.prototype.options.styling = "bootstrap3";
+					
+					new PNotify({
+						
+						title: 'Eliminacion de clientes',
+						text: 'cliente eliminado',
+						type: 'success',
+						hide: true,
+						icon: 'glyphicon glyphicon-remove-circle'
+					});
+                ajaxComensales('seleccionar', 'scripts/ubase.php', 'frmComensales'); //Llena la tabla
+			});
+			
+		</script>
+		
+	
+	</body>
+	
+</html>

@@ -1,0 +1,92 @@
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    border-color: black;
+}
+p {
+    text-align: center;
+    background-color: #45C145;
+    color: white;
+    font-size: 20px;
+    font-style: oblique;
+}
+ul li {
+    text-align: center;
+    background-color: white;
+    color: white;
+    font-size: 20px;
+    border-color: black;
+}
+
+
+ol li {
+    text-align:center;
+    background-color: #45C145;
+    color: white;
+    font-size: 20px;
+    font-style: oblique;
+}
+
+h1,h2,h3{ 
+    color: #ADE440;
+    font-size: 50px;
+}
+/* Float the list items side by side */
+ul.topnav li {float: left;
+    border-color: black;}
+
+
+/* Style the links inside the list items */
+ul.topnav li a {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: justify;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 20px;
+    font-style: oblique;
+    background-color: white;
+    margin-left: 130px;
+    border-color: black;;
+}
+ul.topnav li a img{
+    margin-left: 5px;
+    border-bottom-color: black;
+}
+#Face, #titer, #youtube{
+    margin-top: 110px;
+}
+/* Change background color of links on hover */
+ul.topnav li a:hover {background-color: #7DBB7D;
+    border-color: black;}
+
+/* Hide the list item that contains the link that should open and close the topnav on small screens */
+ul.topnav li.icon {display: none;
+    border-color: black;}
+div.carousel-inner{
+    background-color: #3AA27D;
+    color: #3AA27D;
+}
+img {
+    margin-left: 170px;
+}
+
+body{
+    background-color: #158422;
+}
+div.container {
+    background-color: white;
+}
+
+ div.panel-body{
+    height: 100px;
+    width: 100px;
+}
+
+button.btn btn-success btn-lg{
+    margin-left: 10px;
+}
